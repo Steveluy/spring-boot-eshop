@@ -18,17 +18,6 @@ public class DruidConfig {
     public DataSource druid(){
         return new DruidDataSource();
     }
-//    @Bean
-//    public ServletRegistrationBean statViewServlet() {
-//        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new StatViewServlet());
-//        return servletRegistrationBean;
-//    }
-//    @Bean
-//    public FilterRegistrationBean statFilter() {
-//        //创建过滤器
-//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
-//        return filterRegistrationBean;
-//    }
 
     @Bean
     public ServletRegistrationBean statViewServlet(){
@@ -45,14 +34,14 @@ public class DruidConfig {
         servletRegistrationBean.addInitParameter("resetEnable","false");
         return servletRegistrationBean;
     }
-//    @Bean
-//    public FilterRegistrationBean statFilter(){
-//        //创建过滤器
-//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
-//        //设置过滤器过滤路径
-//        filterRegistrationBean.addUrlPatterns("/*");
-//        //忽略过滤的形式
-//        filterRegistrationBean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-//        return filterRegistrationBean;
-//    }
+    @Bean
+    public FilterRegistrationBean statFilter(){
+        //创建过滤器
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
+        //设置过滤器过滤路径
+        filterRegistrationBean.addUrlPatterns("/*");
+        //忽略过滤的形式
+        filterRegistrationBean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        return filterRegistrationBean;
+    }
 }

@@ -1,5 +1,6 @@
 package com.springboot.eshop.controller;
 
+import com.springboot.eshop.entity.Users;
 import com.springboot.eshop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @ResponseBody
+    @RequestMapping(value = "/insert/{users}", produces = {"application/json;charset=UTF-8"})
+    public int insert(@PathVariable("users")Users users){
+        return userService.insert(users);
+    }
 
     @ResponseBody
     @RequestMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})

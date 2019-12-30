@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.eshop.mapper.usersInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.eshop.entity.usersInfo" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Brithday" property="brithday" jdbcType="DATE" />
+    <result column="Sex" property="sex" jdbcType="INTEGER" />
+    <result column="LoginPwd" property="loginpwd" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="IsRemoved" property="isremoved" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, Name, Email, Brithday, Sex, LoginPwd, CreateTime, IsRemoved
+  </sql>
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from usersinfo
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from usersinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from usersinfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.eshop.entity.usersInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      VALUES IDENTITY_VAL_LOCAL()
+    </selectKey>
+    insert into usersinfo (Name, Email, Brithday, 
+      Sex, LoginPwd, CreateTime, 
+      IsRemoved)
+    values (#{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{brithday,jdbcType=DATE}, 
+      #{sex,jdbcType=INTEGER}, #{loginpwd,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{isremoved,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.eshop.entity.usersInfo" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      VALUES IDENTITY_VAL_LOCAL()
+    </selectKey>
+    insert into usersinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="brithday != null" >
+        Brithday,
+      </if>
+      <if test="sex != null" >
+        Sex,
+      </if>
+      <if test="loginpwd != null" >
+        LoginPwd,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="isremoved != null" >
+        IsRemoved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="brithday != null" >
+        #{brithday,jdbcType=DATE},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="loginpwd != null" >
+        #{loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isremoved != null" >
+        #{isremoved,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.eshop.entity.usersInfo" >
+    update usersinfo
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="brithday != null" >
+        Brithday = #{brithday,jdbcType=DATE},
+      </if>
+      <if test="sex != null" >
+        Sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="loginpwd != null" >
+        LoginPwd = #{loginpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isremoved != null" >
+        IsRemoved = #{isremoved,jdbcType=BIT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.eshop.entity.usersInfo" >
+    update usersinfo
+    set Name = #{name,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Brithday = #{brithday,jdbcType=DATE},
+      Sex = #{sex,jdbcType=INTEGER},
+      LoginPwd = #{loginpwd,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      IsRemoved = #{isremoved,jdbcType=BIT}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

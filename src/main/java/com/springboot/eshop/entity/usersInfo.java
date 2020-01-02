@@ -1,5 +1,6 @@
 package com.springboot.eshop.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class usersInfo {

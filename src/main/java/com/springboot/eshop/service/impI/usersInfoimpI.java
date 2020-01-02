@@ -14,6 +14,11 @@ public class usersInfoimpI implements usersInfoService {
     private usersInfoMapper usersInfoMapper;
 
     @Override
+    public int addUser(usersInfo user) {
+        return usersInfoMapper.insert(user);
+    }
+
+    @Override
     public List<usersInfo> selectAllUser(int pageNum, int pageSize)
     {
         PageHelper.startPage(pageNum, pageSize);

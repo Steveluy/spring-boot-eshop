@@ -14,11 +14,11 @@ public class UserController {
     @Autowired
     private usersInfoService usersInfo;
 
-//    @ResponseBody
-//    @RequestMapping(value = "/insert/{users}", produces = {"application/json;charset=UTF-8"})
-//    public int insert(@PathVariable("users") usersInfo users){
-//        return usersInfoService.insert(users);
-//    }
+    @ResponseBody
+    @RequestMapping(value = "/insert", produces = {"application/json;charset=UTF-8"})
+    public int insert(usersInfo users){
+        return usersInfo.addUser(users);
+    }
 
     @ResponseBody
     @RequestMapping(value = "/all/{pageNum}/{pageSize}", produces = {"application/json;charset=UTF-8"})

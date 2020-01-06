@@ -1,6 +1,6 @@
 package com.springboot.eshop.entity;
 
-import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public class usersInfo {
@@ -10,6 +10,7 @@ public class usersInfo {
 
     private String email;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date brithday;
 
     private Integer sex;

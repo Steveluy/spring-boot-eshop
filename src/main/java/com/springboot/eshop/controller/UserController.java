@@ -21,7 +21,11 @@ public class UserController {
 
     @RequestMapping(value = "/all/{pageNum}/{pageSize}", method= RequestMethod.GET)
     public Object findAllUser(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
-
         return usersInfo.selectAllUser(pageNum,pageSize);
+    }
+
+    @RequestMapping(value="/delete",method = RequestMethod.POST)
+    public int delete(int id) {
+        return usersInfo.deleteUser(id);
     }
 }

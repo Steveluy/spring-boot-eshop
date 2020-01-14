@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.eshop.mapper.deliveryaddressesMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.eshop.entity.deliveryaddresses" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="Sheng" property="sheng" jdbcType="VARCHAR" />
+    <result column="City" property="city" jdbcType="VARCHAR" />
+    <result column="Town" property="town" jdbcType="VARCHAR" />
+    <result column="MoreAddress" property="moreaddress" jdbcType="VARCHAR" />
+    <result column="UserGuid" property="userguid" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="IsRemoved" property="isremoved" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List">
+        id,NAME,Phone,Sheng,City,Town,MoreAddress,UserGuid,CreateTime,IsRemoved
+  </sql>
+  <select id="findAllAddress" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from deliveryaddresses
+  </select>
+  <insert id="insert" parameterType="com.springboot.eshop.entity.deliveryaddresses" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select replace(uuid(), '-', '') as id from dual
+    </selectKey>
+    insert into deliveryaddresses (id,NAME, Phone, Sheng,
+      City, Town, MoreAddress, 
+      UserGuid, CreateTime, IsRemoved
+      )
+    values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{sheng,jdbcType=VARCHAR},
+      #{city,jdbcType=VARCHAR}, #{town,jdbcType=VARCHAR}, #{moreaddress,jdbcType=VARCHAR}, 
+      #{userguid,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{isremoved,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.eshop.entity.deliveryaddresses" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE" >
+      select replace(uuid(), '-', '') as id from dual
+    </selectKey>
+    insert into deliveryaddresses id,
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="sheng != null" >
+        Sheng,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="town != null" >
+        Town,
+      </if>
+      <if test="moreaddress != null" >
+        MoreAddress,
+      </if>
+      <if test="userguid != null" >
+        UserGuid,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="isremoved != null" >
+        IsRemoved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+    id,
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="sheng != null" >
+        #{sheng,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="town != null" >
+        #{town,jdbcType=VARCHAR},
+      </if>
+      <if test="moreaddress != null" >
+        #{moreaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userguid != null" >
+        #{userguid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isremoved != null" >
+        #{isremoved,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

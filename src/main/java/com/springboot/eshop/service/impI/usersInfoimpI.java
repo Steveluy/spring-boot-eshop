@@ -24,4 +24,8 @@ public class usersInfoimpI implements usersInfoService {
         PageHelper.startPage(pageNum, pageSize);
         return usersInfoMapper.selectAllUser();
     }
+    @Override
+    public int deleteUser(int id){
+        return usersInfoMapper.deleteByPrimaryKey(id);
+    }
 }

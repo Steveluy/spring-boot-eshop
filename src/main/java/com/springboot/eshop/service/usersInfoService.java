@@ -9,4 +9,6 @@ public interface usersInfoService  {
     public int addUser(usersInfo user);
 
     List<usersInfo> selectAllUser(int pageNum, int pageSize);
+
+    public int deleteUser(int id);
 }

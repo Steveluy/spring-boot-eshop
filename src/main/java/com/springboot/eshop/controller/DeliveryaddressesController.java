@@ -1,27 +1,26 @@
 package com.springboot.eshop.controller;
 
+import com.springboot.eshop.config.BaseCodeConfig;
 import com.springboot.eshop.entity.deliveryaddresses;
 import com.springboot.eshop.service.deliveryaddressesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value ="/deliveryaddresses")
+@RequestMapping(value = "/DeliveryAddress")
 public class DeliveryaddressesController {
     @Autowired
     public deliveryaddressesService deliveryaddressesService;
 
-    @RequestMapping(value = "insert", method= RequestMethod.POST)
-    public int insert(deliveryaddresses deliveryaddresses)
-    {
-        return deliveryaddressesService.addAddresses(deliveryaddresses);
+    @PostMapping(value = "AddDeliveryAddress")
+    public BaseCodeConfig insert(@RequestBody @Validated deliveryaddresses data) {
+        // 使用SpringValidation校验数据
+        return new BaseCodeConfig().success(deliveryaddressesService.addAddresses(data));
     }
 
-    @RequestMapping(value = "/all/{pageNum}/{pageSize}", method= RequestMethod.GET)
-    public Object findAllAddress(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize){
-        return deliveryaddressesService.findAllAddress(pageNum,pageSize);
+    @GetMapping(value = "/GetDeliveryAddress/{pageNum}/{pageSize}")
+    public BaseCodeConfig findAllAddress(@PathVariable("pageNum") int pageNum, @PathVariable("pageSize") int pageSize) {
+        return new BaseCodeConfig().success(deliveryaddressesService.findAllAddress(pageNum, pageSize));
     }
 }

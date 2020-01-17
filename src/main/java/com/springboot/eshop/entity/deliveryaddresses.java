@@ -1,20 +1,21 @@
 package com.springboot.eshop.entity;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class deliveryaddresses {
     private String id;
-
+    @NotBlank
     private String name;
-
+    @NotBlank
     private String phone;
-
+    @NotBlank
     private String sheng;
-
+    @NotBlank
     private String city;
-
+    @NotBlank
     private String town;
-
+    @NotBlank
     private String moreaddress;
 
     private String userguid;

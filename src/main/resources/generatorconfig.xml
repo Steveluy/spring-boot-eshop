@@ -31,7 +31,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table schema="deliveryaddresses" tableName="deliveryaddresses" domainObjectName="deliveryaddresses" enableCountByExample="true" enableUpdateByExample="true"
+        <table schema="goods" tableName="goods" domainObjectName="goods" enableCountByExample="true" enableUpdateByExample="true"
         enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
             <generatedKey column="ID" sqlStatement="DB2" identity="true" />
         </table>

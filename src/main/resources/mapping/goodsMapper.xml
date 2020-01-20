@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.eshop.mapper.goodsMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.eshop.entity.goods" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="ImgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="Price" property="price" jdbcType="REAL" />
+    <result column="Price_old" property="priceOld" jdbcType="REAL" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="IsRemoved" property="isremoved" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, Name, ImgUrl, Price, Price_old, CreateTime, IsRemoved
+  </sql>
+  <select id="findAllGoods" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from goods
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from goods
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.eshop.entity.goods" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      VALUES IDENTITY_VAL_LOCAL()
+    </selectKey>
+    insert into goods (Name, ImgUrl, Price, 
+      Price_old, CreateTime, IsRemoved
+      )
+    values (#{name,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, 
+      #{priceOld,jdbcType=REAL}, #{createtime,jdbcType=TIMESTAMP}, #{isremoved,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.eshop.entity.goods" >
+    <selectKey resultType="java.lang.String" keyProperty="id" order="AFTER" >
+      VALUES IDENTITY_VAL_LOCAL()
+    </selectKey>
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="imgurl != null" >
+        ImgUrl,
+      </if>
+      <if test="price != null" >
+        Price,
+      </if>
+      <if test="priceOld != null" >
+        Price_old,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="isremoved != null" >
+        IsRemoved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="priceOld != null" >
+        #{priceOld,jdbcType=REAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isremoved != null" >
+        #{isremoved,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.eshop.entity.goods" >
+    update goods
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        ImgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        Price = #{price,jdbcType=REAL},
+      </if>
+      <if test="priceOld != null" >
+        Price_old = #{priceOld,jdbcType=REAL},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isremoved != null" >
+        IsRemoved = #{isremoved,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.eshop.entity.goods" >
+    update goods
+    set Name = #{name,jdbcType=VARCHAR},
+      ImgUrl = #{imgurl,jdbcType=VARCHAR},
+      Price = #{price,jdbcType=REAL},
+      Price_old = #{priceOld,jdbcType=REAL},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      IsRemoved = #{isremoved,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
